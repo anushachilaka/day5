@@ -1,0 +1,73 @@
+#include<stdio.h>
+struct fac
+{
+     int num;
+     int den;
+};
+struct fac fr[100];
+struct fac sum;
+struct fac input()
+{
+    struct fac fr;
+    printf("enter the num and den");
+    scanf("%d%d",&fr.num,&fr.den);
+    return fr;
+}
+void getnfac(int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+      fr[i]=input();
+}
+struct fac addfac(int i)
+{
+    
+    int n1,n2,lcm;
+    lcm=lcmfac(fr[i].den,sum.den);
+    n1=(fr[i].num)*(lcm/fr[i].den);
+    n2=(sum.num)*(lcm/sum.den);
+    sum.num=n1+n2;
+    sum.den=lcm;
+    return sum;
+}
+
+int lcmfac(int a,int b)
+{
+   int  max, step, lcm;
+   lcm = 0;
+   if(a > b)
+      max = step = a;
+   else
+      max = step = b;
+   while(1) 
+   {
+      if(max%a == 0 && max%b == 0)
+      { lcm = max;
+         break;    
+      }
+      max += step;
+   }
+  return lcm;
+}
+void sumnfac(int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+     addfac(i);
+}
+void output()
+{
+    
+    printf("the sum is %d/%d",sum.num,sum.den);
+}
+void main()
+{
+    int n;
+    sum.num=0;
+    sum.den=1;
+    printf("enter the value of n");
+    scanf("%d",&n);
+    getnfac(n);
+    sumnfac(n);
+    output();
+}
